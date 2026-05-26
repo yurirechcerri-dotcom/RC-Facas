@@ -1,0 +1,6 @@
+{
+  "name": "RC Facas - Rancho do Churrasqueiro",
+  "description": "Descubra facas de elite e garanta sua entrada no grupo oficial de ações e premiações diárias.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
