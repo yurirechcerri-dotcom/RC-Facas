@@ -260,6 +260,23 @@ export default function App() {
                 </p>
               </div>
 
+              {/* Showcase Image - Display beautifully only on mobile view to establish visual hook first before Action */}
+              <div className="block lg:hidden my-6 -mx-4 sm:mx-0">
+                <div className="relative w-full h-[240px] xs:h-[280px] sm:h-[360px] sm:rounded-3xl overflow-hidden bg-neutral-950 border-y sm:border border-neutral-900/60 select-none group">
+                  <img
+                    src={vitrineImage}
+                    alt="Vitrine com várias facas"
+                    className="w-full h-full object-cover filter brightness-[0.70] contrast-[1.1] pointer-events-none animate-gentle-zoom"
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                  />
+                  {/* Omnidirectional Vignette Shadow Overlay specifically tuned to fade boundaries on vertical mobile layouts */}
+                  <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-neutral-950 via-neutral-950/30 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent pointer-events-none" />
+                  <div className="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-r from-neutral-950/20 via-transparent to-neutral-950/20 pointer-events-none" />
+                </div>
+              </div>
+
               {/* Colossal Green Pulsing Button */}
               <div className="pt-2">
                 <a
@@ -267,38 +284,46 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleCaptureLead({ name: "Acesso Direto Hero", phone: "Redirecionado" })}
-                  className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-5 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-xl sm:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
+                  className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
                   style={{ animationDuration: "2s" }}
                 >
-                  <WhatsAppIcon className="w-8 h-8 flex-shrink-0" />
-                  <span>👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
+                  <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0" />
+                  <span className="text-center">👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
                 </a>
               </div>
 
-              {/* Huge clear visual bullets under the main button */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-left max-w-xl mx-auto lg:mx-0 font-sans text-sm sm:text-base">
-                <div className="flex items-center space-x-2.5 text-neutral-200 bg-neutral-900/40 p-3 rounded-lg border border-neutral-900">
-                  <span className="text-emerald-400 font-extrabold text-xl">✓</span>
-                  <span><strong>+2.800</strong> clientes ativos</span>
+              {/* High density verified trust markers / bullets below call-to-action */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-4 pt-4 text-left max-w-xl mx-auto lg:mx-0 font-sans text-[11px] xs:text-xs sm:text-sm">
+                <div className="flex items-center space-x-2 text-neutral-200 bg-neutral-900/40 p-2.5 sm:p-3 rounded-xl border border-neutral-900">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-black">
+                    ✓
+                  </div>
+                  <span><strong>+2.800</strong> de clientes</span>
                 </div>
-                <div className="flex items-center space-x-2.5 text-neutral-200 bg-neutral-900/40 p-3 rounded-lg border border-neutral-900">
-                  <span className="text-emerald-400 font-extrabold text-xl">✓</span>
-                  <span>Rifas a partir de <strong>R$ 2,50</strong></span>
+                <div className="flex items-center space-x-2 text-neutral-200 bg-neutral-900/40 p-2.5 sm:p-3 rounded-xl border border-neutral-900">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-black">
+                    ✓
+                  </div>
+                  <span>Rifas de <strong>R$ 2,50</strong></span>
                 </div>
-                <div className="flex items-center space-x-2.5 text-neutral-200 bg-neutral-900/40 p-3 rounded-lg border border-neutral-900">
-                  <span className="text-emerald-400 font-extrabold text-xl">✓</span>
-                  <span>Envios para todo o Brasil</span>
+                <div className="flex items-center space-x-2 text-neutral-200 bg-neutral-900/40 p-2.5 sm:p-3 rounded-xl border border-neutral-900">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-black">
+                    ✓
+                  </div>
+                  <span>Envios para <strong>todo Brasil</strong></span>
                 </div>
-                <div className="flex items-center space-x-2.5 text-neutral-200 bg-neutral-900/40 p-3 rounded-lg border border-neutral-900">
-                  <span className="text-emerald-400 font-extrabold text-xl">✓</span>
-                  <span>Sorteios diários seguros</span>
+                <div className="flex items-center space-x-2 text-neutral-200 bg-neutral-900/40 p-2.5 sm:p-3 rounded-xl border border-neutral-900">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-[10px] font-black">
+                    ✓
+                  </div>
+                  <span>Sorteios <strong>diários</strong></span>
                 </div>
               </div>
 
             </div>
 
             {/* Right Column: Ultimate Rounded Vertical Showcase (Mockup Vignette style!) */}
-            <div className="lg:col-span-6 flex items-center justify-center pt-2 lg:pt-0">
+            <div className="hidden lg:flex lg:col-span-6 items-center justify-center pt-2 lg:pt-0">
               <div className="relative w-full max-w-[540px] aspect-[10/13] rounded-3xl overflow-hidden bg-neutral-950 shadow-[0_30px_75px_rgba(0,0,0,0.98)] border border-neutral-900 select-none group">
                 <img
                   src={vitrineImage}
@@ -326,7 +351,7 @@ export default function App() {
 
       {/* Immersive Gallery Section with no ugly borders, displaying floating photos */}
       <section className="py-16 bg-neutral-950 border-b border-neutral-900 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 md:space-y-6">
           
           <div className="text-center space-y-3">
             <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
@@ -360,50 +385,51 @@ export default function App() {
             </button>
 
             {/* Scrollable track containing pure image cards */}
-            <div 
-              ref={galleryScrollRef}
-              className="overflow-x-auto scrollbar-none flex gap-6 py-4 px-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing select-none"
-            >
-              {ALL_KNIFE_PHOTOS.map((url, idx) => {
-                const tiltClass = 
-                  idx % 3 === 0 ? "md:rotate-[-1deg]" :
-                  idx % 3 === 1 ? "md:rotate-[1deg]" :
-                  "md:rotate-[-0.5deg]";
+            <div className="relative">
+              <div 
+                ref={galleryScrollRef}
+                className="overflow-x-auto scrollbar-none flex gap-6 py-4 px-4 snap-x snap-mandatory cursor-grab active:cursor-grabbing select-none"
+              >
+                {ALL_KNIFE_PHOTOS.map((url, idx) => {
+                  const tiltClass = 
+                    idx % 3 === 0 ? "md:rotate-[-1deg]" :
+                    idx % 3 === 1 ? "md:rotate-[1deg]" :
+                    "md:rotate-[-0.5deg]";
 
-                return (
-                  <div 
-                    key={idx}
-                    onClick={() => setSelectedKnifeUrl(url)}
-                    className={`group shrink-0 w-[265px] sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-900 shadow-[0_22px_50px_rgba(0,0,0,0.92)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-neutral-850 hover:border-neutral-700 transition-all duration-500 ease-out hover:scale-103 snap-center cursor-zoom-in relative ${tiltClass}`}
-                  >
-                    <img 
-                      src={url} 
-                      alt={`Faca de Elite ${idx + 1}`} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
-                      referrerPolicy="no-referrer"
-                      loading="lazy"
-                    />
-                    
-                    {/* Shadow overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+                  return (
+                    <div 
+                      key={idx}
+                      onClick={() => setSelectedKnifeUrl(url)}
+                      className={`group shrink-0 w-[265px] sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-900 shadow-[0_22px_50px_rgba(0,0,0,0.92)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-neutral-850 hover:border-neutral-700 transition-all duration-500 ease-out hover:scale-103 snap-center cursor-zoom-in relative ${tiltClass}`}
+                    >
+                      <img 
+                        src={url} 
+                        alt={`Faca de Elite ${idx + 1}`} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                      />
+                      
+                      {/* Shadow overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
 
-                    {/* Hover absolute action overlay helper */}
-                    <div className="absolute inset-0 bg-neutral-950/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="bg-neutral-900/95 border border-neutral-800 px-3.5 py-2 rounded-xl text-xs font-black text-neutral-200 flex items-center space-x-1.5 shadow-2xl">
-                        <span>🔍 Ampliar Detalhes</span>
+                      {/* Hover absolute action overlay helper */}
+                      <div className="absolute inset-0 bg-neutral-950/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="bg-neutral-900/95 border border-neutral-800 px-3.5 py-2 rounded-xl text-xs font-black text-neutral-200 flex items-center space-x-1.5 shadow-2xl">
+                          <span>🔍 Ampliar Detalhes</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              
+              {/* Fade out mask effect on the right to entice swiping on mobile devices */}
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-neutral-950 to-transparent pointer-events-none z-20 block sm:hidden" />
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-neutral-950 to-transparent pointer-events-none z-20 block sm:hidden" />
             </div>
 
-            {/* Interactive swipe/drag hint for mobile touch users */}
-            <div className="flex items-center justify-center space-x-2 pt-4 sm:hidden">
-              <span className="text-[10px] font-mono tracking-widest text-neutral-500 uppercase flex items-center">
-                ◄ deslize para os lados para ver mais lâminas ►
-              </span>
-            </div>
+
 
           </div>
 
@@ -422,10 +448,11 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleCaptureLead({ name: "Acesso Bottom Provas", phone: "Redirecionado" })}
-              className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-5 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-xl sm:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-pulse"
+              className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
+              style={{ animationDuration: "2s" }}
             >
-              <WhatsAppIcon className="w-8 h-8 flex-shrink-0" />
-              <span>👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
+              <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0" />
+              <span className="text-center">👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
             </a>
           </div>
         </div>
@@ -437,11 +464,11 @@ export default function App() {
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             
             {/* Left Column: Overlapping Real Photo Mockup Lookbook of their physical store */}
             <div className="lg:col-span-6 order-2 lg:order-1 select-none">
-              <div className="relative w-full max-w-lg mx-auto py-6">
+              <div className="relative w-full max-w-lg mx-auto pt-2 pb-6 lg:py-6">
                 
                 {/* Main: Shopping Center Booth / Kiosk photo */}
                 <div className="relative rounded-3xl overflow-hidden border border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.95)] aspect-[4/3] w-11/12 z-10 hover:border-neutral-700 transition duration-500 group">
@@ -464,7 +491,7 @@ export default function App() {
                 {/* Overlay: Closer look badge of the elegant logo signpole */}
                 <div 
                   onClick={() => setSelectedKnifeUrl(placaLogoImage)}
-                  className="absolute right-0 bottom-0 w-44 h-44 rounded-3xl overflow-hidden border-4 border-neutral-950 shadow-[0_30px_60px_rgba(0,0,0,0.98)] z-20 hover:scale-105 hover:border-amber-500/50 transition-all duration-300 ease-out cursor-zoom-in group"
+                  className="absolute right-0 bottom-0 w-28 h-28 xs:w-36 xs:h-36 sm:w-44 sm:h-44 rounded-3xl overflow-hidden border-4 border-neutral-950 shadow-[0_30px_60px_rgba(0,0,0,0.98)] z-20 hover:scale-105 hover:border-amber-500/50 transition-all duration-300 ease-out cursor-zoom-in group"
                 >
                   <img 
                     src={placaLogoImage} 
@@ -523,10 +550,11 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => handleCaptureLead({ name: "Acesso Bottom Quiosque", phone: "Redirecionado" })}
-              className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-5 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-xl sm:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-pulse"
+              className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
+              style={{ animationDuration: "2s" }}
             >
-              <WhatsAppIcon className="w-8 h-8 flex-shrink-0" />
-              <span>👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
+              <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0" />
+              <span className="text-center">👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
             </a>
           </div>
 
