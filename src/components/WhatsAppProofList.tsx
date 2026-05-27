@@ -65,6 +65,7 @@ export default function WhatsAppProofList() {
                 alt={fb.caption} 
                 className="w-full h-full object-cover rounded-2xl"
                 referrerPolicy="no-referrer"
+                loading="lazy"
               />
               
 
@@ -105,6 +106,7 @@ export default function WhatsAppProofList() {
               alt="Feedback Ampliado" 
               className="max-w-full max-h-[80vh] md:max-h-[88vh] rounded-xl object-contain"
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
           </div>
         </div>

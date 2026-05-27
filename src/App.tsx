@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import { 
   Flame, Award, Shield, Truck, Sparkles, MessageCircle, 
   Settings, CheckCircle, ChevronDown, Phone, Users, 
   Star, Coffee, Package, Compass, Lock, Trash2, ShieldCheck, Mail,
-  ChevronLeft, ChevronRight
+  ChevronLeft, ChevronRight, MapPin
 } from "lucide-react";
 import { Lead, Testimonial, AppConfig } from "./types";
 import LeadCaptureForm from "./components/LeadCaptureForm";
@@ -14,14 +15,13 @@ import { initMetaPixel, trackUnifiedMetaEvent } from "./utils/metaTracking";
 
 // High fidelity custom vector for WhatsApp Brand Icon
 const WhatsAppIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
-  <svg 
-    className={className} 
-    viewBox="0 0 24 24" 
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M19.001 4.908A11.817 11.817 0 0 0 11.968 0C5.414 0 .08 5.334.077 11.89c0 2.096.547 4.142 1.588 5.945L.005 24l6.335-1.662c1.746.953 3.71 1.456 5.704 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413zM12.05 21.803h-.005a9.78 9.78 0 0 1-4.99-1.364l-.358-.213-3.71 .973.99-3.61-.233-.372a9.799 9.799 0 0 1-1.5-5.234c.002-5.412 4.41-9.82 9.823-9.82a9.75 9.75 0 0 1 6.947 2.88 9.773 9.773 0 0 1 2.876 6.95c-.004 5.414-4.412 9.82-9.82 9.82zm5.422-7.421c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
-  </svg>
+  <img 
+    src="https://i.ibb.co/Cp9nyBGX/79dc31280371b8ffbe56ec656418e122.png" 
+    alt="WhatsApp Logo" 
+    className={`${className} object-contain`} 
+    referrerPolicy="no-referrer"
+    loading="lazy"
+  />
 );
 
 // Core image paths pointing to the real custom knife assets from ImgBB
@@ -30,6 +30,11 @@ const silverMasonicKnives = "https://i.ibb.co/m1F6H7R/Whats-App-Image-2026-05-26
 const completeBarbecueSet = "https://i.ibb.co/fGB4wSmS/Whats-App-Image-2026-05-26-at-18-16-02-2.jpg";
 const rotatingKnifeBlock = "https://i.ibb.co/Qv0zwJ67/Whats-App-Image-2026-05-26-at-18-16-03-1.jpg";
 const logoUrl = "https://i.ibb.co/vvVy8hX1/Captura-de-Tela-2026-05-26-a-s-18-59-34.png";
+
+// Premium real kiosk assets from ImgBB uploaded by the user
+const vitrineImage = "https://i.ibb.co/845QyByk/unnamed-1.webp";     // Vitrine com várias facas
+const ilhaImage = "https://i.ibb.co/cKLBtyy4/unnamed-2.webp";        // Ilha do shopping center
+const placaLogoImage = "https://i.ibb.co/TDy73kfB/2025-05-09.webp";   // Mini poste da logo na ilha
 
 // Full gallery array containing other custom handcrafted blades (first photo removed to avoid repetition)
 const ALL_KNIFE_PHOTOS = [
@@ -213,11 +218,26 @@ export default function App() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100 selection:bg-amber-500 selection:text-neutral-950 font-sans flex flex-col justify-between">
       
       {/* Core Hero Section - Captures attention immediately with extreme readability */}
-      <section className="relative overflow-hidden pt-10 pb-16 md:py-20 border-b border-neutral-900 bg-neutral-950" ref={captureSectionRef} id="lead_capture_form_section">
-        <div className="absolute top-0 left-12 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute right-0 bottom-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden pt-10 pb-16 md:py-24 border-b border-neutral-900 bg-neutral-950" ref={captureSectionRef} id="lead_capture_form_section">
+        {/* Real Kiosk Physical Background subtle texture */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          <img 
+            src={ilhaImage} 
+            alt="Fundo" 
+            className="w-full h-full object-cover opacity-[0.08] filter brightness-50 contrast-125 saturate-50" 
+            referrerPolicy="no-referrer"
+            loading="lazy"
+          />
+          {/* Subtle gradient vignetting */}
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950" />
+          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-transparent to-neutral-950" />
+          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, transparent 35%, #0a0a0a 100%)" }} />
+        </div>
+
+        <div className="absolute top-0 left-12 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute right-0 bottom-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none z-0" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Column: Direct Ultimate Hook & Colossal Button */}
@@ -226,7 +246,7 @@ export default function App() {
               {/* Brand Logo directly on top of the title section */}
               <div className="flex justify-center lg:justify-start">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 overflow-hidden flex items-center justify-center select-none bg-transparent">
-                  <img src={logoUrl} alt="Rancho do Churrasqueiro Logo" className="w-full h-full object-contain scale-[1.05]" referrerPolicy="no-referrer" />
+                  <img src={logoUrl} alt="Rancho do Churrasqueiro Logo" className="w-full h-full object-contain scale-[1.05]" referrerPolicy="no-referrer" loading="lazy" />
                 </div>
               </div>
 
@@ -277,16 +297,26 @@ export default function App() {
 
             </div>
 
-            {/* Right Column: Ultimate Rounded Vertical Display (Static) */}
+            {/* Right Column: Ultimate Rounded Vertical Showcase (Mockup Vignette style!) */}
             <div className="lg:col-span-5 flex items-center justify-center pt-2 lg:pt-0">
-              <div className="relative w-full max-w-[340px] aspect-[3/4] rounded-3xl overflow-hidden bg-neutral-900 shadow-[0_25px_60px_rgba(0,0,0,0.95)] border border-neutral-800/60">
+              <div className="relative w-full max-w-[360px] aspect-[10/13] rounded-3xl overflow-hidden bg-neutral-950 shadow-[0_30px_75px_rgba(0,0,0,0.98)] border border-neutral-900 select-none group">
                 <img
-                  src={luxuryDamascusKnife}
-                  alt="Faca Gaúcha de Luxo"
-                  className="w-full h-full object-cover pointer-events-none"
+                  src={vitrineImage}
+                  alt="Vitrine com várias facas"
+                  className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.08] group-hover:scale-103 transition-transform duration-700 ease-out pointer-events-none"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/45 via-transparent to-transparent pointer-events-none" />
+                
+                {/* 4-way Vignette Blur overlays to dissolve image edges into the master black page */}
+                {/* Upper edge fade */}
+                <div className="absolute top-0 left-0 right-0 h-1/5 bg-gradient-to-b from-neutral-950 via-neutral-950/20 to-transparent pointer-events-none" />
+                {/* Lower edge fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-transparent pointer-events-none" />
+                {/* Left edge fade (integrates with the text beautifully as in the user mockup!) */}
+                <div className="absolute left-0 top-0 bottom-0 w-3/5 bg-gradient-to-r from-neutral-950 via-neutral-950/25 to-transparent pointer-events-none" />
+                {/* Right edge fade */}
+                <div className="absolute right-0 top-0 bottom-0 w-1/5 bg-gradient-to-l from-neutral-950/30 to-transparent pointer-events-none" />
               </div>
             </div>
 
@@ -351,6 +381,7 @@ export default function App() {
                       alt={`Faca de Elite ${idx + 1}`} 
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                     
                     {/* Shadow overlay */}
@@ -400,6 +431,108 @@ export default function App() {
         </div>
       </section>
 
+      {/* Interactive Retail Kiosk Showcase - Establishes unmatched real world physical authority */}
+      <section className="py-16 bg-neutral-950 border-b border-neutral-900 relative overflow-hidden">
+        {/* Subtle blur highlights for design premiumness */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Column: Overlapping Real Photo Mockup Lookbook of their physical store */}
+            <div className="lg:col-span-6 order-2 lg:order-1 select-none">
+              <div className="relative w-full max-w-lg mx-auto py-6">
+                
+                {/* Main: Shopping Center Booth / Kiosk photo */}
+                <div className="relative rounded-3xl overflow-hidden border border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.95)] aspect-[4/3] w-11/12 z-10 hover:border-neutral-700 transition duration-500 group">
+                  <img 
+                    src={ilhaImage} 
+                    alt="Nosso Quiosque de Facas no Shopping Center" 
+                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 pointer-events-none" 
+                    referrerPolicy="no-referrer" 
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/20 to-transparent pointer-events-none" />
+                  
+                  {/* Floating glassmorphism label */}
+                  <div className="absolute bottom-4 left-4 inline-flex items-center space-x-2 bg-neutral-900/90 border border-neutral-800 px-3.5 py-2 rounded-xl backdrop-blur-md shadow-lg font-sans">
+                    <span className="text-emerald-400 font-extrabold text-sm">📍</span>
+                    <span className="text-xs font-bold text-neutral-100">Continente Shopping</span>
+                  </div>
+                </div>
+                
+                {/* Overlay: Closer look badge of the elegant logo signpole */}
+                <div 
+                  onClick={() => setSelectedKnifeUrl(placaLogoImage)}
+                  className="absolute right-0 bottom-0 w-44 h-44 rounded-3xl overflow-hidden border-4 border-neutral-950 shadow-[0_30px_60px_rgba(0,0,0,0.98)] z-20 hover:scale-105 hover:border-amber-500/50 transition-all duration-300 ease-out cursor-zoom-in group"
+                >
+                  <img 
+                    src={placaLogoImage} 
+                    alt="Placa Oficial Rancho do Churrasqueiro" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500 pointer-events-none" 
+                    referrerPolicy="no-referrer" 
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 to-transparent pointer-events-none" />
+                </div>
+
+              </div>
+            </div>
+
+            {/* Right Column: Copywriting Copy establishing authority and transparency */}
+            <div className="lg:col-span-6 order-1 lg:order-2 space-y-4 text-center lg:text-left flex flex-col justify-center">
+              <div className="space-y-1">
+                <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+                  Nosso Quiosque de <span className="text-amber-500">Facas de Luxo</span>
+                </h2>
+              </div>
+
+              <p className="text-neutral-300 font-sans text-sm sm:text-base leading-relaxed">
+                Muito além de um grupo virtual: o <span className="text-white font-extrabold font-black">Rancho do Churrasqueiro — RC Facas</span> possui um quiosque boutique oficial no <span className="text-amber-500 font-bold">Continente Shopping</span>, garantindo procedência impecável, nota fiscal e segurança total em cada sorteio.
+              </p>
+
+              {/* Location & Address Detail Card */}
+              <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 transition duration-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-left shadow-lg">
+                <div className="space-y-1">
+                  <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-black text-amber-500 font-mono">
+                    <MapPin className="w-3.5 h-3.5" /> Endereço Oficial
+                  </span>
+                  <p className="text-xs sm:text-sm text-neutral-300 leading-tight font-sans font-medium">
+                    Continente Shopping • Distrito Industrial, São José - SC
+                  </p>
+                </div>
+                
+                <a 
+                  href="https://maps.google.com/?q=Continente+Shopping+Esquina+Rod+Rodovia+BR+101,+SC+-+281,+KM+210+-+Distrito+industrial,+S%C3%A3o+Jos%C3%A9+-+SC,+88104-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center space-x-1 border border-neutral-700 hover:border-amber-500/50 hover:bg-amber-500/10 text-neutral-250 hover:text-amber-400 px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer"
+                >
+                  <span>Ver no Maps</span>
+                  <span className="text-[10px]">↗</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Colossal bottom green button repeat underneath the kiosk */}
+          <div className="text-center pt-12">
+            <a
+              href={config.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => handleCaptureLead({ name: "Acesso Bottom Quiosque", phone: "Redirecionado" })}
+              className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-5 px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-xl sm:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-pulse"
+            >
+              <WhatsAppIcon className="w-8 h-8 flex-shrink-0" />
+              <span>👉 CLIQUE AQUI E ENTRE NO GRUPO VIP DA RIFA 👈</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
       {/* Section 4: Why Join the VIP Group (Requested section exactly as image mockup) */}
       <section className="py-16 bg-neutral-950 border-b border-neutral-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -419,36 +552,60 @@ export default function App() {
           <div className="space-y-4">
             
             {/* Benefit Row 1 */}
-            <div className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
+              className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300"
+            >
               <span className="text-2xl flex-shrink-0 leading-none" role="img" aria-label="presente">🎁</span>
               <p className="text-sm sm:text-base md:text-lg font-bold text-neutral-200">
                 Acesso antecipado às rifas antes de abrir para o público geral
               </p>
-            </div>
+            </motion.div>
 
             {/* Benefit Row 2 */}
-            <div className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+              className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300"
+            >
               <span className="text-2xl flex-shrink-0 leading-none" role="img" aria-label="dinheiro">💰</span>
               <p className="text-sm sm:text-base md:text-lg font-bold text-neutral-200">
                 Ofertas exclusivas apenas para membros do grupo
               </p>
-            </div>
+            </motion.div>
 
             {/* Benefit Row 3 */}
-            <div className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+              className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-neutral-800/80 hover:border-amber-500/20 hover:bg-neutral-900/70 transition duration-300"
+            >
               <span className="text-2xl flex-shrink-0 leading-none" role="img" aria-label="raio">⚡</span>
               <p className="text-sm sm:text-base md:text-lg font-bold text-neutral-200">
                 Premiações diárias e dezenas promocionais limitadas
               </p>
-            </div>
+            </motion.div>
 
             {/* Benefit Row 4 */}
-            <div className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-emerald-950 hover:border-emerald-500/20 hover:bg-neutral-900/70 transition duration-300">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.35 }}
+              className="flex items-center space-x-4 p-5 rounded-xl bg-neutral-900/40 border border-emerald-950 hover:border-emerald-500/20 hover:bg-neutral-900/70 transition duration-300"
+            >
               <span className="text-2xl flex-shrink-0 leading-none" role="img" aria-label="caixa">📦</span>
               <p className="text-sm sm:text-base md:text-lg font-bold text-neutral-100">
                 Transparência total — envios reais, comprovantes e suporte imediato
               </p>
-            </div>
+            </motion.div>
 
           </div>
 
@@ -499,6 +656,7 @@ export default function App() {
               alt="Visualização da Faca" 
               className="max-h-[80vh] max-w-full object-contain rounded-2xl shadow-2xl border border-neutral-800"
               referrerPolicy="no-referrer"
+              loading="lazy"
             />
             <p className="text-center text-xs text-neutral-400 font-bold uppercase tracking-widest mt-4">
               ✓ Imagem em alta definição de luxo — Clique em qualquer lugar para fechar

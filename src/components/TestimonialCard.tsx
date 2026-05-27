@@ -36,6 +36,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
             alt={testimonial.author}
             className="w-10 h-10 rounded-full object-cover border border-neutral-800"
             referrerPolicy="no-referrer"
+            loading="lazy"
           />
         ) : (
           <div className="w-10 h-10 rounded-full bg-neutral-800 text-amber-500 font-bold flex items-center justify-center text-sm border border-neutral-700">
