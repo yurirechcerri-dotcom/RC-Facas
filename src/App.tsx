@@ -241,7 +241,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Column: Direct Ultimate Hook & Colossal Button */}
-            <div className="lg:col-span-7 space-y-8 text-center lg:text-left flex flex-col justify-center">
+            <div className="lg:col-span-6 space-y-8 text-center lg:text-left flex flex-col justify-center">
               
               {/* Brand Logo directly on top of the title section */}
               <div className="flex justify-center lg:justify-start">
@@ -298,12 +298,12 @@ export default function App() {
             </div>
 
             {/* Right Column: Ultimate Rounded Vertical Showcase (Mockup Vignette style!) */}
-            <div className="lg:col-span-5 flex items-center justify-center pt-2 lg:pt-0">
-              <div className="relative w-full max-w-[360px] aspect-[10/13] rounded-3xl overflow-hidden bg-neutral-950 shadow-[0_30px_75px_rgba(0,0,0,0.98)] border border-neutral-900 select-none group">
+            <div className="lg:col-span-6 flex items-center justify-center pt-2 lg:pt-0">
+              <div className="relative w-full max-w-[540px] aspect-[10/13] rounded-3xl overflow-hidden bg-neutral-950 shadow-[0_30px_75px_rgba(0,0,0,0.98)] border border-neutral-900 select-none group">
                 <img
                   src={vitrineImage}
                   alt="Vitrine com várias facas"
-                  className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.08] group-hover:scale-103 transition-transform duration-700 ease-out pointer-events-none"
+                  className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.08] pointer-events-none animate-gentle-zoom"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />

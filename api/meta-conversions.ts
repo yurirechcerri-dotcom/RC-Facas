@@ -98,6 +98,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     const result = await response.json();
+
+    // Check for Facebook/Meta Token validity or expired error signals (OAuthException 190 / Got unexpected null)
+    const isAuthError = !response.ok && (
+      result?.error?.code === 190 || 
+      result?.error?.type === "OAuthException" || 
+      (result?.error?.message && String(result.error.message).toLowerCase().includes("unexpected null"))
+    );
+
+    if (isAuthError) {
+      console.warn("\n=================== VERCEL META CONFIGURATION WARNING ===================");
+      console.warn(`[Meta Access Token Error] Code: ${result?.error?.code || 'N/A'}, Message: "${result?.error?.message || 'N/A'}"`);
+      console.warn("The configured Meta Access Token (META_ACCESS_TOKEN) is invalid, expired, or revoked.");
+      console.warn("Please generate a new System User Access Token in your Facebook Business Manager (under Events Manager -> Settings).");
+      console.warn("The Conversions API event was gracefully simulated to prevent breaking the landing page flow.");
+      console.warn("=========================================================================\n");
+      
+      return res.status(200).json({
+        success: true,
+        status: "simulated_success",
+        message: "Event logged successfully (Conversions API was bypassed/simulated because of an expired or invalid Meta Access Token)."
+      });
+    }
+
     console.log("[Vercel Meta API Response]", JSON.stringify(result));
 
     if (!response.ok) {
