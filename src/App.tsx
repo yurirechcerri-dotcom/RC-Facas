@@ -172,7 +172,9 @@ export default function App() {
     });
   };
 
-  const rastrearCliqueGrupoWhatsApp = () => {
+  const rastrearCliqueGrupoWhatsApp = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    console.log("[Meta Pixel] Clique WhatsApp iniciado");
     if (window.fbq) {
       try {
         window.fbq("track", "Contact", {
@@ -185,11 +187,17 @@ export default function App() {
           content_category: "Rifa Facas",
           destino: "whatsapp_group"
         });
-        console.log("[Meta Pixel] Disparados Contact e CliqueGrupoWhatsApp");
-      } catch (e) {
-        console.error("[Meta Pixel Error] Erro ao disparar eventos", e);
+        console.log("[Meta Pixel] Contact e CliqueGrupoWhatsApp disparados");
+      } catch (err) {
+        console.error("[Meta Pixel Error] Erro ao disparar eventos", err);
       }
+    } else {
+      console.warn("[Meta Pixel] fbq não disponível no clique");
     }
+
+    setTimeout(() => {
+      window.open(config.whatsappUrl, "_blank", "noopener,noreferrer");
+    }, 500);
   };
 
   const handleDeleteLead = (id: string) => {
@@ -293,9 +301,9 @@ export default function App() {
                   href={config.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => {
+                  onClick={(e) => {
                     handleCaptureLead({ name: "Acesso Direto Hero", phone: "Redirecionado" });
-                    rastrearCliqueGrupoWhatsApp();
+                    rastrearCliqueGrupoWhatsApp(e);
                   }}
                   className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
                   style={{ animationDuration: "2s" }}
@@ -460,9 +468,9 @@ export default function App() {
               href={config.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
+              onClick={(e) => {
                 handleCaptureLead({ name: "Acesso Bottom Provas", phone: "Redirecionado" });
-                rastrearCliqueGrupoWhatsApp();
+                rastrearCliqueGrupoWhatsApp(e);
               }}
               className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
               style={{ animationDuration: "2s" }}
@@ -565,9 +573,9 @@ export default function App() {
               href={config.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
+              onClick={(e) => {
                 handleCaptureLead({ name: "Acesso Bottom Quiosque", phone: "Redirecionado" });
-                rastrearCliqueGrupoWhatsApp();
+                rastrearCliqueGrupoWhatsApp(e);
               }}
               className="inline-flex w-full sm:w-auto items-center justify-center space-x-3 py-4 sm:py-5 px-5 sm:px-8 rounded-2xl bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-neutral-950 font-black text-sm xs:text-base sm:text-xl lg:text-2xl tracking-tight uppercase border-2 border-[#3cf37e] shadow-[0_15px_45px_rgba(37,211,102,0.45)] hover:shadow-[0_15px_60px_rgba(37,211,102,0.65)] transition-all duration-300 select-none animate-bounce"
               style={{ animationDuration: "2s" }}
