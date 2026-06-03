@@ -2,6 +2,7 @@ declare global {
   interface Window {
     fbq: any;
     _fbq: any;
+    __rcPixelBaseLoaded?: boolean;
   }
 }
 
@@ -11,6 +12,11 @@ declare global {
  */
 export function initMetaPixel(pixelId?: string) {
   if (typeof window === "undefined") return;
+
+  if (window.__rcPixelBaseLoaded) {
+    console.log("[Meta Pixel] Already loaded in index.html. Skipping React initialization & PageView to avoid duplication.");
+    return;
+  }
 
   const resolvedPixelId = pixelId || "1382017203733797";
 
