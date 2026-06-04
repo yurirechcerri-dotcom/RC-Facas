@@ -81,6 +81,35 @@ const SAMPLE_LEADS_MOCK: Lead[] = [
   { id: "l-mock-3", name: "Mateus Ribeiro", phone: "(62) 99125-9008", capturedAt: new Date(Date.now() - 3600000 * 12).toISOString() }
 ];
 
+const enviarEventoMetaFallback = (eventName: string, params: Record<string, string> = {}) => {
+  try {
+    const url = new URL("https://www.facebook.com/tr/");
+    url.searchParams.set("id", "1382017203733797");
+    url.searchParams.set("ev", eventName);
+    url.searchParams.set("dl", window.location.href);
+    url.searchParams.set("rl", document.referrer || "");
+    url.searchParams.set("if", "false");
+    url.searchParams.set("ts", String(Date.now()));
+
+    Object.entries(params).forEach(([key, value]) => {
+      url.searchParams.set(`cd[${key}]`, String(value));
+    });
+
+    const img = new Image();
+    img.width = 1;
+    img.height = 1;
+    img.style.display = "none";
+    img.src = url.toString();
+
+    (window as any).__metaPixelFallbackImages = (window as any).__metaPixelFallbackImages || [];
+    (window as any).__metaPixelFallbackImages.push(img);
+
+    console.log(`[Meta Pixel Fallback] ${eventName} enviado via imagem`, url.toString());
+  } catch (error) {
+    console.error(`[Meta Pixel Fallback] erro ao enviar ${eventName}`, error);
+  }
+};
+
 export default function App() {
   const [config, setConfig] = useState<AppConfig>(DEFAULT_CONFIG);
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -170,35 +199,6 @@ export default function App() {
       currency: "BRL",
       config
     });
-  };
-
-  const enviarEventoMetaFallback = (eventName: string, params: Record<string, string> = {}) => {
-    try {
-      const url = new URL("https://www.facebook.com/tr/");
-      url.searchParams.set("id", "1382017203733797");
-      url.searchParams.set("ev", eventName);
-      url.searchParams.set("dl", window.location.href);
-      url.searchParams.set("rl", document.referrer || "");
-      url.searchParams.set("if", "false");
-      url.searchParams.set("ts", String(Date.now()));
-
-      Object.entries(params).forEach(([key, value]) => {
-        url.searchParams.set(`cd[${key}]`, String(value));
-      });
-
-      const img = new Image();
-      img.width = 1;
-      img.height = 1;
-      img.style.display = "none";
-      img.src = url.toString();
-
-      (window as any).__metaPixelFallbackImages = (window as any).__metaPixelFallbackImages || [];
-      (window as any).__metaPixelFallbackImages.push(img);
-
-      console.log(`[Meta Pixel Fallback] ${eventName} enviado via imagem`, url.toString());
-    } catch (error) {
-      console.error(`[Meta Pixel Fallback] erro ao enviar ${eventName}`, error);
-    }
   };
 
   const rastrearCliqueGrupoWhatsApp = (e: React.MouseEvent<HTMLAnchorElement>) => {
