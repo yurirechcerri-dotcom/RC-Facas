@@ -81,6 +81,15 @@ const SAMPLE_LEADS_MOCK: Lead[] = [
   { id: "l-mock-3", name: "Mateus Ribeiro", phone: "(62) 99125-9008", capturedAt: new Date(Date.now() - 3600000 * 12).toISOString() }
 ];
 
+const getMetaTestEventCode = () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("test_event_code") || "";
+  } catch {
+    return "";
+  }
+};
+
 const enviarEventoMetaFallback = (eventName: string, params: Record<string, string> = {}) => {
   try {
     const url = new URL("https://www.facebook.com/tr/");
@@ -90,6 +99,12 @@ const enviarEventoMetaFallback = (eventName: string, params: Record<string, stri
     url.searchParams.set("rl", document.referrer || "");
     url.searchParams.set("if", "false");
     url.searchParams.set("ts", String(Date.now()));
+
+    const testEventCode = getMetaTestEventCode();
+    if (testEventCode) {
+      url.searchParams.set("test_event_code", testEventCode);
+      console.log("[Meta Pixel Fallback] test_event_code aplicado:", testEventCode);
+    }
 
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.set(`cd[${key}]`, String(value));
